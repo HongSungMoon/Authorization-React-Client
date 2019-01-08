@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Login from './components/Login';
+import { Route } from 'react-router-dom';
+
+import JoinForm from './components/JoinForm';
+import LoginForm from './components/LoginForm';
+import { connect } from 'react-redux';
 
 class App extends Component {
+
+  isLogin = false
+
+  constructor(props) {
+    super(props);
+}
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <Login />
+          <Route exact path="/" component={LoginForm}/>
+          <Route path="/join" component={JoinForm}/>
+          <h1>VALUE: { this.props.value }</h1>
         </header>
       </div>
     );
   }
 }
+
+let mapStateToProps = (state) => {
+  return {
+      value: state.counter.value
+  };
+}
+
+App = connect(mapStateToProps)(App);
 
 export default App;
