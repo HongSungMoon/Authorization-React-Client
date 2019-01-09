@@ -12,7 +12,7 @@ class Home extends Component {
         url: ''
     }
 
-    idChange = (e) => {
+    urlChange = (e) => {
         this.setState({
             url: e.target.value,
         });
