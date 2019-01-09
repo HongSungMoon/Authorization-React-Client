@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 
 import JoinForm from './components/JoinForm';
 import LoginForm from './components/LoginForm';
+import Home from './components/Home';
 import { connect } from 'react-redux';
 
 class App extends Component {
@@ -19,19 +20,20 @@ class App extends Component {
         <header className="App-header">
           <Route exact path="/" component={LoginForm}/>
           <Route path="/join" component={JoinForm}/>
-          <h1>VALUE: { this.props.value }</h1>
+          <Route path="/home" component={Home}/>
+          {/* <h1>VALUE: { this.props.value }</h1> */}
         </header>
       </div>
     );
   }
 }
 
-let mapStateToProps = (state) => {
-  return {
-      value: state.counter.value
-  };
-}
+// let mapStateToProps = (state) => {
+//   return {
+//       value: state.counter.value
+//   };
+// }
 
-App = connect(mapStateToProps)(App);
+// App = connect(mapStateToProps)(App);
 
 export default App;
