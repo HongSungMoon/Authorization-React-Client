@@ -9,31 +9,44 @@ import axios from '../utils/http';
 class Home extends Component {
 
     state = {
-        url: ''
+        input: ''
     }
 
-    urlChange = (e) => {
+    inputChange = (e) => {
         this.setState({
-            url: e.target.value,
+            input: e.target.value,
         });
     }
 
     handleSubmit = (event, obj) => {
         event.preventDefault();
-        axios.post('http://127.0.0.1:8080/user/login', this.state)
+        axios.post('http://127.0.0.1:8081/api/hello', obj.props.value.userInfo.access_token)
             .then(function (response) {
                 console.log(response);
-                obj.props.onAuthorize(response.data);
+                obj.setState({ input: response.data });
             })
             .catch(function (error) {
+                if(!error.response) {
+                    alert("Authorize Server is dead");
+                } else if(error.response.status == 401) {
+                    alert("Token Expired");
+                } else {
+                    alert("API Server is dead");
+                }
                 console.log(error);
+                obj.props.onLogout();
+                obj.props.history.push('/')
+
             });
+        // axios.post(`http://localhost:8000/api/auth`,
+        // { headers: { 'Content-type': 'application/x-www-form-urlencoded', }, id: 'hong', pwd: '12345' }).then(response => { console.log('response', JSON.stringify(response, null, 2)) }).catch(error => { console.log('failed', error) })
+
     }
 
     handleLogout = (obj) => {
-                obj.props.onLogout();
-                this.setState({url: ''});
-                obj.props.history.push('/')
+        obj.props.onLogout();
+        this.setState({ input: '' });
+        obj.props.history.push('/')
     }
 
     constructor(props) {
@@ -44,16 +57,20 @@ class Home extends Component {
         return (
             <div>
                 <form className="form-signin" onSubmit={(evt) => this.handleSubmit(evt, this)}>
-                    <h2 className="form-signin-heading"> URL Shortener </h2>
-                    <label htmlFor="inputID" className="sr-only"> ID  </label>
-                    <input type="text" id="inputID" className="form-control" value={this.state.url} placeholder="URL" required onChange={this.urlChange} />
+                    <h2 className="form-signin-heading"> Hello </h2>
+                    <label htmlFor="input" className="sr-only"> ID  </label>
+                    <input type="text" id="input" readOnly className="form-control" value={this.state.input} placeholder="" onChange={this.inputChange} />
                     <br></br>
                     <button className="btn btn-lg btn-primary btn-block" type="submit"> Send
                 </button>
                 </form>
                 <br></br>
-                <button className="btn btn-lg btn-primary btn-block" onClick={()=> this.handleLogout(this)}> Logout
+                <button className="btn btn-lg btn-primary btn-block" onClick={() => this.handleLogout(this)}> Logout
                 </button>
+                <br></br>
+                    <Link to="/userInfo">
+                        <span> Do you want to modify your information?</span>
+                    </Link>
             </div>
         );
     }

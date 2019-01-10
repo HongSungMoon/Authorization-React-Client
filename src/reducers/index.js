@@ -27,7 +27,7 @@ const service = (state = serviceInitialState, action) => {
                     email: null
                 }
             });
-        case AUTHORIZE:
+            case AUTHORIZE:
             return Object.assign({}, state, {
                 islogin: 1,
                 userInfo: action.userInfo

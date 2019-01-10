@@ -41,18 +41,15 @@ class JoinForm extends Component {
             })
             .catch(function (error) {
                 console.log(error);
-            });
-    }
-
-    handleSubmit2 = (event, obj) => {
-        event.preventDefault();
-        axios.post('http://127.0.0.1:8081/user/login', this.state)
-            .then(function (response) {
-                console.log(response);
-                obj.props.onAuthorize(response.data);
-            })
-            .catch(function (error) {
-                console.log(error);
+                // PopupActions.openAlert({ title, message, onConfirm })
+                if(!error.response) {
+                    alert("Authorize Server is dead");
+                } else if(error.response.status == 401) {
+                    alert("Invalid Id, Password");
+                } else {
+                    alert("Authorize Server is dead");
+                }
+               
             });
     }
 
@@ -68,6 +65,7 @@ class JoinForm extends Component {
                 <div>
                     <form className="form-signin" onSubmit={(evt) => this.handleSubmit(evt, this)}>
                         <h2 className="form-signin-heading"> Please sign in </h2>
+                        <br></br>
                         <label htmlFor="inputID" className="sr-only"> ID  </label>
                         <input type="text" id="inputID" className="form-control" value={this.state.id} placeholder="ID" required onChange={this.idChange} />
                         <label htmlFor="inputPassword" className="sr-only"> Password </label>
@@ -80,6 +78,10 @@ class JoinForm extends Component {
                     <Link to="/join">
                         <button className="btn btn-lg btn-primary btn-block"> Sign up
                 </button>
+                    </Link>
+                    <br></br>
+                    <Link to="/password">
+                        <span>Forgot password?</span> 
                     </Link>
                 </div>
             );

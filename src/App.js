@@ -5,7 +5,8 @@ import { Route } from 'react-router-dom';
 import JoinForm from './components/JoinForm';
 import LoginForm from './components/LoginForm';
 import Home from './components/Home';
-import { connect } from 'react-redux';
+import Password from './components/Password';
+import UserInfo from './components/UserInfo';
 
 class App extends Component {
 
@@ -21,6 +22,8 @@ class App extends Component {
           <Route exact path="/" component={LoginForm}/>
           <Route path="/join" component={JoinForm}/>
           <Route path="/home" component={Home}/>
+          <Route path="/password" component={Password}/>
+          <Route path="/userinfo" component={UserInfo}/>
           {/* <h1>VALUE: { this.props.value }</h1> */}
         </header>
       </div>
