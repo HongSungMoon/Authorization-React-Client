@@ -61,6 +61,9 @@ class UserInfo extends Component {
 
     constructor(props) {
         super(props);
+        if(props.value.isLogin == 0) {
+            props.history.push('/')
+        }
     }
 
 

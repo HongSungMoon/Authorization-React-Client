@@ -26,9 +26,9 @@ class Home extends Component {
                 obj.setState({ input: response.data });
             })
             .catch(function (error) {
-                if(!error.response) {
+                if (!error.response) {
                     alert("Authorize Server is dead");
-                } else if(error.response.status == 401) {
+                } else if (error.response.status == 401) {
                     alert("Token Expired");
                 } else {
                     alert("API Server is dead");
@@ -51,28 +51,57 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+        if(props.value.isLogin == 0) {
+            props.history.push('/');
+        }
     }
 
     render() {
-        return (
-            <div>
-                <form className="form-signin" onSubmit={(evt) => this.handleSubmit(evt, this)}>
-                    <h2 className="form-signin-heading"> Hello </h2>
-                    <label htmlFor="input" className="sr-only"> ID  </label>
-                    <input type="text" id="input" readOnly className="form-control" value={this.state.input} placeholder="" onChange={this.inputChange} />
+        if (this.props.value.userInfo.user_type === 'admin') {
+            return (
+                <div>
+                    <form className="form-signin" onSubmit={(evt) => this.handleSubmit(evt, this)}>
+                        <h2 className="form-signin-heading"> Hello </h2>
+                        <br></br>
+                        <label htmlFor="input" className="sr-only"> ID  </label>
+                        <input type="text" id="input" readOnly className="form-control" value={this.state.input} placeholder="" onChange={this.inputChange} />
+                        <br></br>
+                        <button className="btn btn-lg btn-primary btn-block" type="submit"> Send
+                </button>
+                    </form><br></br>
+                    <Link to="/userlist">
+                    <button className="btn btn-lg btn-primary btn-block"> UserList
+                </button></Link>
                     <br></br>
-                    <button className="btn btn-lg btn-primary btn-block" type="submit"> Send
+                    <button className="btn btn-lg btn-primary btn-block" onClick={() => this.handleLogout(this)}> Logout
                 </button>
-                </form>
-                <br></br>
-                <button className="btn btn-lg btn-primary btn-block" onClick={() => this.handleLogout(this)}> Logout
-                </button>
-                <br></br>
+                    <br></br>
                     <Link to="/userInfo">
                         <span> Do you want to modify your information?</span>
                     </Link>
-            </div>
-        );
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <form className="form-signin" onSubmit={(evt) => this.handleSubmit(evt, this)}>
+                        <h2 className="form-signin-heading"> Hello </h2>
+                        <label htmlFor="input" className="sr-only"> ID  </label>
+                        <input type="text" id="input" readOnly className="form-control" value={this.state.input} placeholder="" onChange={this.inputChange} />
+                        <br></br>
+                        <button className="btn btn-lg btn-primary btn-block" type="submit"> Send
+                </button>
+                    </form>
+                    <br></br>
+                    <button className="btn btn-lg btn-primary btn-block" onClick={() => this.handleLogout(this)}> Logout
+                </button>
+                    <br></br>
+                    <Link to="/userInfo">
+                        <span> Do you want to modify your information?</span>
+                    </Link>
+                </div>
+            );
+        }
     }
 
 

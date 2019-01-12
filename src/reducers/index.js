@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, AUTHORIZE } from '../actions';
+import { LOGIN, LOGOUT, AUTHORIZE, USERLIST } from '../actions';
 import { combineReducers } from 'redux';
 
 const serviceInitialState = {
@@ -7,8 +7,10 @@ const serviceInitialState = {
         access_token: null,
         id: null,
         name: null,
-        email: null
-    }
+        email: null,
+        user_type: null
+    },
+    userList: null
 };
 
 const service = (state = serviceInitialState, action) => {
@@ -24,13 +26,19 @@ const service = (state = serviceInitialState, action) => {
                     access_token: null,
                     id: null,
                     name: null,
-                    email: null
+                    email: null,
+                    user_type: null
                 }
             });
             case AUTHORIZE:
             return Object.assign({}, state, {
                 islogin: 1,
                 userInfo: action.userInfo
+            });
+            case USERLIST:
+            return Object.assign({}, state, {
+                islogin: 1,
+                userList: action.userList
             });
         default:
             return state;

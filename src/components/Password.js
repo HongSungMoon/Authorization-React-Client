@@ -42,9 +42,12 @@ class Password extends Component {
             .catch(function (error) {
                 if(!error.response) {
                     alert("Authorize Server is dead");
+                    obj.props.history.push('/');
                 } else if (error.response.status == 401) {
                     alert("Information is not matched");
+                    obj.props.history.push('/');
                 } else {
+                    obj.props.history.push('/');
                     alert("Authorize Server is dead");
                 }
                 console.log(error);

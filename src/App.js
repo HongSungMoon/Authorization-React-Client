@@ -7,6 +7,7 @@ import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 import Password from './components/Password';
 import UserInfo from './components/UserInfo';
+import UserList from './components/UserList';
 
 class App extends Component {
 
@@ -24,6 +25,7 @@ class App extends Component {
           <Route path="/home" component={Home}/>
           <Route path="/password" component={Password}/>
           <Route path="/userinfo" component={UserInfo}/>
+          <Route path="/userlist" component={UserList}/>
           {/* <h1>VALUE: { this.props.value }</h1> */}
         </header>
       </div>

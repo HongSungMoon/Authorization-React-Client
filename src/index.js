@@ -13,9 +13,6 @@ import loginApp from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
 
 export { default as App } from './App';
-export { default as Home } from './pages/Home';
-export { default as Login } from './pages/Login';
-export { default as Join } from './pages/Join';
 
 const devTools =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
