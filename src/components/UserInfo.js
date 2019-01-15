@@ -55,6 +55,7 @@ class UserInfo extends Component {
             })
             .catch(function (error) {
                 alert("Authorize Server is dead");
+                props.history.push('/');
                 console.log(error);
             });
     }

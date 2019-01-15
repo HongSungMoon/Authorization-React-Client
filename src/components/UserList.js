@@ -71,7 +71,7 @@ class UserList extends Component {
             })
             .catch(function (error) {
                 alert("Authorize Server is dead");
-                props.history.push('/')
+                props.history.push('/');
                 console.log(error);
             });
     }
